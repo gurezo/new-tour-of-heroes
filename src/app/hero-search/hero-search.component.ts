@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import { Observable, Subject } from 'rxjs';
 
@@ -11,7 +13,8 @@ import { HeroService } from '../hero.service';
     selector: 'app-hero-search',
     templateUrl: './hero-search.component.html',
     styleUrls: ['./hero-search.component.scss'],
-    standalone: false
+    standalone: true,
+    imports: [CommonModule, RouterModule]
 })
 export class HeroSearchComponent implements OnInit {
   heroes$!: Observable<Hero[]>;
