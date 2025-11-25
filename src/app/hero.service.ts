@@ -75,7 +75,18 @@ export class HeroService {
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.error(error);
+      console.error('Error details:', {
+        status: error.status,
+        statusText: error.statusText,
+        message: error.message,
+        error: error.error,
+        errorText:
+          typeof error.error === 'string'
+            ? error.error
+            : JSON.stringify(error.error),
+        url: error.url,
+        ok: error.ok,
+      });
 
       this.log(`${operation} failed: ${error.message}`);
 
