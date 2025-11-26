@@ -1,12 +1,32 @@
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
+import { enableProdMode, importProvidersFrom } from '@angular/core';
+import { bootstrapApplication } from '@angular/platform-browser';
+import {
+  provideRouter,
+  withEnabledBlockingInitialNavigation,
+} from '@angular/router';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
-import { AppModule } from './app/app.module';
+import { AppComponent } from './app/app.component';
+import { routes } from './app/app.routes';
+import { InMemoryDataService } from './app/in-memory-data.service';
 import { environment } from './environments/environment';
 
 if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideRouter(routes, withEnabledBlockingInitialNavigation()),
+    provideHttpClient(withInterceptorsFromDi()),
+    importProvidersFrom(
+      HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
+        dataEncapsulation: false,
+      })
+    ),
+  ],
+}).catch((err) => console.error(err));

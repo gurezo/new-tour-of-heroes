@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
@@ -12,15 +12,13 @@ import { MessagesService } from './messages.service';
   providedIn: 'root',
 })
 export class HeroService {
+  private http = inject(HttpClient);
+  private messagesService = inject(MessagesService);
+
   private heroesUrl = 'api/heroes';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
-
-  constructor(
-    private http: HttpClient,
-    private messagesService: MessagesService
-  ) {}
 
   getHeroes(): Observable<Hero[]> {
     return this.http.get<Hero[]>(this.heroesUrl).pipe(
@@ -75,7 +73,18 @@ export class HeroService {
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.error(error);
+      console.error('Error details:', {
+        status: error.status,
+        statusText: error.statusText,
+        message: error.message,
+        error: error.error,
+        errorText:
+          typeof error.error === 'string'
+            ? error.error
+            : JSON.stringify(error.error),
+        url: error.url,
+        ok: error.ok,
+      });
 
       this.log(`${operation} failed: ${error.message}`);
 
