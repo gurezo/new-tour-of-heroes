@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
@@ -13,10 +13,10 @@ import { HeroService } from '../hero.service';
   imports: [RouterModule],
 })
 export class HeroesComponent implements OnInit, OnDestroy {
+  private heroService = inject(HeroService);
+
   private destory = new Subject<void>();
   heroes: Hero[] = [];
-
-  constructor(private heroService: HeroService) {}
 
   ngOnInit(): void {
     this.getHoroes();

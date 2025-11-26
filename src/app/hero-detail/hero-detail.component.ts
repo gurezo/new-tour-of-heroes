@@ -1,11 +1,5 @@
 import { CommonModule, Location } from '@angular/common';
-import {
-  ChangeDetectorRef,
-  Component,
-  Input,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
@@ -21,15 +15,13 @@ import { HeroService } from '../hero.service';
   imports: [CommonModule, FormsModule],
 })
 export class HeroDetailComponent implements OnInit, OnDestroy {
+  private route = inject(ActivatedRoute);
+  private heroService = inject(HeroService);
+  private location = inject(Location);
+  private cdr = inject(ChangeDetectorRef);
+
   private destory = new Subject<void>();
   @Input() hero?: Hero;
-
-  constructor(
-    private route: ActivatedRoute,
-    private heroService: HeroService,
-    private location: Location,
-    private cdr: ChangeDetectorRef
-  ) {}
 
   ngOnDestroy(): void {
     this.destory.next();

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { Hero } from '../hero';
@@ -12,13 +12,11 @@ import { HeroService } from '../hero.service';
   imports: [RouterModule, HeroSearchComponent],
 })
 export class DashboardComponent implements OnInit {
+  private heroService = inject(HeroService);
+  private cdr = inject(ChangeDetectorRef);
+
   private destory = new Subject<void>();
   heroes: Hero[] = [];
-
-  constructor(
-    private heroService: HeroService,
-    private cdr: ChangeDetectorRef
-  ) {}
 
   ngOnInit(): void {
     this.getHeroes();

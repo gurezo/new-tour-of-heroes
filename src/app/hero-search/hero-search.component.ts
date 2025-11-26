@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { Observable, Subject } from 'rxjs';
@@ -16,10 +16,10 @@ import { HeroService } from '../hero.service';
   imports: [CommonModule, RouterModule],
 })
 export class HeroSearchComponent implements OnInit {
+  private heroService = inject(HeroService);
+
   heroes$!: Observable<Hero[]>;
   private searchTerms = new Subject<string>();
-
-  constructor(private heroService: HeroService) {}
 
   // 検索語をobservableストリームにpushする
   search(term: string): void {

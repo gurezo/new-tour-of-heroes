@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
@@ -12,15 +12,13 @@ import { MessagesService } from './messages.service';
   providedIn: 'root',
 })
 export class HeroService {
+  private http = inject(HttpClient);
+  private messagesService = inject(MessagesService);
+
   private heroesUrl = 'api/heroes';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
-
-  constructor(
-    private http: HttpClient,
-    private messagesService: MessagesService
-  ) {}
 
   getHeroes(): Observable<Hero[]> {
     return this.http.get<Hero[]>(this.heroesUrl).pipe(
