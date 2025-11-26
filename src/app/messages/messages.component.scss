@@ -1,19 +1,32 @@
 /* MessagesComponent's private CSS styles */
+:host {
+  display: block;
+  margin-top: 1.25rem;
+}
+
 h2 {
   color: #a80000;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: lighter;
 }
 
-.clear {
-  color: #333;
-  background-color: #eee;
-  margin-bottom: 12px;
-  padding: 1rem;
-  border-radius: 4px;
-  font-size: 1rem;
+.wrapper {
+  display: flex;
+  justify-content: space-between;
 }
-.clear:hover {
+
+.clear {
+  height: 2.5rem;
+  margin-top: 0;
+  margin-left: 1.25rem;
+  margin-bottom: 12px;
+  padding: 0.5rem;
   color: white;
   background-color: #42545c;
+  border-radius: 4px;
+  font-size: 1rem;
+  &:hover {
+    color: #333;
+    background-color: #42545cb2;
+  }
 }

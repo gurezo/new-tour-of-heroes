@@ -4,7 +4,10 @@ import {
 } from '@angular/common/http';
 import { enableProdMode, importProvidersFrom } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { provideRouter } from '@angular/router';
+import {
+  provideRouter,
+  withEnabledBlockingInitialNavigation,
+} from '@angular/router';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { AppComponent } from './app/app.component';
@@ -18,7 +21,7 @@ if (environment.production) {
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideRouter(routes),
+    provideRouter(routes, withEnabledBlockingInitialNavigation()),
     provideHttpClient(withInterceptorsFromDi()),
     importProvidersFrom(
       HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {

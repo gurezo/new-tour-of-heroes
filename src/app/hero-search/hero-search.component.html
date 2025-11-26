@@ -4,11 +4,11 @@
 
   <ul class="search-result">
     @for (hero of heroes$ | async; track hero) {
-      <li>
-        <a routerLink="/detail/{{ hero.id }}">
-          {{ hero.name }}
-        </a>
-      </li>
+    <li>
+      <a routerLink="/detail/{{ hero.id }}">
+        {{ hero.name }}
+      </a>
+    </li>
     }
   </ul>
 </div>
