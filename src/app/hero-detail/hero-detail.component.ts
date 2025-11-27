@@ -1,5 +1,12 @@
 import { CommonModule, Location } from '@angular/common';
-import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, inject } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  inject,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
@@ -21,7 +28,7 @@ export class HeroDetailComponent implements OnInit, OnDestroy {
   private cdr = inject(ChangeDetectorRef);
 
   private destory = new Subject<void>();
-  @Input() hero?: Hero;
+  hero = signal<Hero | undefined>(undefined);
 
   ngOnDestroy(): void {
     this.destory.next();
@@ -38,7 +45,7 @@ export class HeroDetailComponent implements OnInit, OnDestroy {
       .getHero(id)
       .pipe(takeUntil(this.destory))
       .subscribe((hero) => {
-        this.hero = hero;
+        this.hero.set(hero);
         this.cdr.detectChanges();
       });
   }
@@ -48,9 +55,10 @@ export class HeroDetailComponent implements OnInit, OnDestroy {
   }
 
   save(): void {
-    if (this.hero) {
+    const hero = this.hero();
+    if (hero) {
       this.heroService
-        .updateHero(this.hero)
+        .updateHero(hero)
         .pipe(takeUntil(this.destory))
         .subscribe(() => this.goBack());
     }
