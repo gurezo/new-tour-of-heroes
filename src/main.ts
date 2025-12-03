@@ -17,10 +17,11 @@ if (environment.production) {
 
 bootstrapApplication(AppComponent, {
     providers: [
-        importProvidersFrom(BrowserModule, AppRoutingModule, FormsModule, HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
+        importProvidersFrom(BrowserModule, AppRoutingModule, FormsModule),
+        provideHttpClient(withInterceptorsFromDi()),
+        importProvidersFrom(HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
             dataEncapsulation: false,
-        })),
-        provideHttpClient(withInterceptorsFromDi())
+        }))
     ]
 })
   .catch(err => console.error(err));
