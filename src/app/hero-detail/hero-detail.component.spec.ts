@@ -8,8 +8,8 @@ describe('HeroDetailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HeroDetailComponent ]
-    })
+    imports: [HeroDetailComponent]
+})
     .compileComponents();
   });
 
