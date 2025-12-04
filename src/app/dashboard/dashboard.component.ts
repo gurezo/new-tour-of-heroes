@@ -1,21 +1,17 @@
+import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { Hero } from '../hero';
-import { HeroService } from '../hero.service';
 import { HeroSearchComponent } from '../hero-search/hero-search.component';
-import { RouterLink } from '@angular/router';
-import { NgFor } from '@angular/common';
+import { HeroService } from '../hero.service';
 
 @Component({
-    selector: 'app-dashboard',
-    templateUrl: './dashboard.component.html',
-    styleUrls: ['./dashboard.component.scss'],
-    standalone: true,
-    imports: [
-        NgFor,
-        RouterLink,
-        HeroSearchComponent,
-    ],
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss'],
+  standalone: true,
+  imports: [NgFor, RouterLink, HeroSearchComponent],
 })
 export class DashboardComponent implements OnInit {
   private destory = new Subject<void>();

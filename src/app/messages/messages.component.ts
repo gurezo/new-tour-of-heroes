@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
+import { NgFor, NgIf } from '@angular/common';
 import { MessagesService } from '../messages.service';
-import { NgIf, NgFor } from '@angular/common';
 @Component({
-    selector: 'app-messages',
-    templateUrl: './messages.component.html',
-    styleUrls: ['./messages.component.scss'],
-    standalone: true,
-    imports: [NgIf, NgFor],
+  selector: 'app-messages',
+  templateUrl: './messages.component.html',
+  styleUrls: ['./messages.component.scss'],
+  standalone: true,
+  imports: [NgIf, NgFor],
 })
 export class MessagesComponent implements OnInit {
   constructor(public messagesService: MessagesService) {}
