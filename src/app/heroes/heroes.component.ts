@@ -10,7 +10,6 @@ import { HeroService } from '../hero.service';
   selector: 'app-heroes',
   templateUrl: './heroes.component.html',
   styleUrls: ['./heroes.component.scss'],
-  standalone: true,
   imports: [NgFor, RouterLink],
 })
 export class HeroesComponent implements OnInit, OnDestroy {

@@ -10,7 +10,6 @@ import { HeroService } from '../hero.service';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-  standalone: true,
   imports: [NgFor, RouterLink, HeroSearchComponent],
 })
 export class DashboardComponent implements OnInit {

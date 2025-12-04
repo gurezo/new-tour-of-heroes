@@ -11,7 +11,6 @@ import { HeroService } from '../hero.service';
   selector: 'app-hero-detail',
   templateUrl: './hero-detail.component.html',
   styleUrls: ['./hero-detail.component.scss'],
-  standalone: true,
   imports: [NgIf, FormsModule, UpperCasePipe],
 })
 export class HeroDetailComponent implements OnInit, OnDestroy {

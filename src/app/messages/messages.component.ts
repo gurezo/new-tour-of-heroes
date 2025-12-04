@@ -6,7 +6,6 @@ import { MessagesService } from '../messages.service';
   selector: 'app-messages',
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.scss'],
-  standalone: true,
   imports: [NgIf, NgFor],
 })
 export class MessagesComponent implements OnInit {

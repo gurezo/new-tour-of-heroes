@@ -13,7 +13,6 @@ import { HeroService } from '../hero.service';
   selector: 'app-hero-search',
   templateUrl: './hero-search.component.html',
   styleUrls: ['./hero-search.component.scss'],
-  standalone: true,
   imports: [NgFor, RouterLink, AsyncPipe],
 })
 export class HeroSearchComponent implements OnInit {

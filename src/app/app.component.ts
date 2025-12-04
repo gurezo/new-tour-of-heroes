@@ -6,7 +6,6 @@ import { MessagesComponent } from './messages/messages.component';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  standalone: true,
   imports: [RouterLink, RouterOutlet, MessagesComponent],
 })
 export class AppComponent {
