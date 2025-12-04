@@ -5,6 +5,7 @@ import { MessagesService } from '../messages.service';
   selector: 'app-messages',
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.scss'],
+  imports: [],
 })
 export class MessagesComponent implements OnInit {
   constructor(public messagesService: MessagesService) {}

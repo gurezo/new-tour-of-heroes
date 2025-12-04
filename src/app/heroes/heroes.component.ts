@@ -2,12 +2,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { Hero } from '../hero';
 
+import { RouterLink } from '@angular/router';
 import { HeroService } from '../hero.service';
 
 @Component({
   selector: 'app-heroes',
   templateUrl: './heroes.component.html',
   styleUrls: ['./heroes.component.scss'],
+  imports: [RouterLink],
 })
 export class HeroesComponent implements OnInit, OnDestroy {
   private destory = new Subject<void>();

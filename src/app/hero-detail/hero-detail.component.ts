@@ -1,8 +1,9 @@
-import { Location } from '@angular/common';
+import { Location, UpperCasePipe } from '@angular/common';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 
+import { FormsModule } from '@angular/forms';
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
 
@@ -10,6 +11,7 @@ import { HeroService } from '../hero.service';
   selector: 'app-hero-detail',
   templateUrl: './hero-detail.component.html',
   styleUrls: ['./hero-detail.component.scss'],
+  imports: [FormsModule, UpperCasePipe],
 })
 export class HeroDetailComponent implements OnInit, OnDestroy {
   private destory = new Subject<void>();
