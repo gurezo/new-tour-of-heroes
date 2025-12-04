@@ -4,7 +4,7 @@ import { Observable, Subject } from 'rxjs';
 
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
-import { AsyncPipe, NgFor } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
@@ -13,7 +13,7 @@ import { HeroService } from '../hero.service';
   selector: 'app-hero-search',
   templateUrl: './hero-search.component.html',
   styleUrls: ['./hero-search.component.scss'],
-  imports: [NgFor, RouterLink, AsyncPipe],
+  imports: [RouterLink, AsyncPipe],
 })
 export class HeroSearchComponent implements OnInit {
   heroes$!: Observable<Hero[]>;

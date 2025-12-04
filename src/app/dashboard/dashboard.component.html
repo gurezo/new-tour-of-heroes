@@ -1,9 +1,11 @@
 <h2>Top Heroes</h2>
 ng generate component hero-search
 <div class="heroes-menu">
-  <a *ngFor="let hero of heroes" routerLink="/detail/{{ hero.id }}">
+  @for (hero of heroes; track hero) {
+  <a routerLink="/detail/{{ hero.id }}">
     {{ hero.name }}
   </a>
+  }
 </div>
 
 <app-hero-search></app-hero-search>

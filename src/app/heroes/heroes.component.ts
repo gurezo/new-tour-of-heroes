@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { Hero } from '../hero';
 
-import { NgFor } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { HeroService } from '../hero.service';
 
@@ -10,7 +9,7 @@ import { HeroService } from '../hero.service';
   selector: 'app-heroes',
   templateUrl: './heroes.component.html',
   styleUrls: ['./heroes.component.scss'],
-  imports: [NgFor, RouterLink],
+  imports: [RouterLink],
 })
 export class HeroesComponent implements OnInit, OnDestroy {
   private destory = new Subject<void>();

@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
@@ -10,7 +9,7 @@ import { HeroService } from '../hero.service';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-  imports: [NgFor, RouterLink, HeroSearchComponent],
+  imports: [RouterLink, HeroSearchComponent],
 })
 export class DashboardComponent implements OnInit {
   private destory = new Subject<void>();
