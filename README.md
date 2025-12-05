@@ -2,6 +2,22 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 20.3.13.
 
+## Installation
+
+This project uses [pnpm](https://pnpm.io/) as the package manager.
+
+First, install pnpm if you haven't already:
+
+```bash
+npm install -g pnpm
+```
+
+Then install dependencies:
+
+```bash
+pnpm install
+```
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
