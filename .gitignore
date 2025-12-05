@@ -54,3 +54,9 @@ package-lock.json
 .nx/cache
 
 pglite-debug.log
+
+
+
+.nx/workspace-data
+.cursor/rules/nx-rules.mdc
+.github/instructions/nx.instructions.md
