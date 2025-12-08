@@ -20,7 +20,7 @@ async function bootstrap() {
     .addTag('heroes')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('swagger', app, document);
 
   const port = process.env['PORT'] || 3000;
   await app.listen(port);
@@ -28,7 +28,7 @@ async function bootstrap() {
     `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`
   );
   Logger.log(
-    `📚 Swagger documentation is available at: http://localhost:${port}/api`
+    `📚 Swagger documentation is available at: http://localhost:${port}/swagger`
   );
 }
 
