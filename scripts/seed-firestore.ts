@@ -15,9 +15,10 @@ const serviceAccountKey = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
 if (isEmulator) {
   // エミュレーター使用時は認証情報なしで初期化
   // FIRESTORE_EMULATOR_HOST環境変数が設定されている場合、自動的にエミュレーターに接続されます
+  // プロジェクトIDは .firebaserc の設定に合わせる必要があります
   if (admin.apps.length === 0) {
     admin.initializeApp({
-      projectId: 'demo-project', // エミュレーターでは任意のプロジェクトIDでOK
+      projectId: 'new-tour-of-heroes', // .firebaserc のプロジェクトIDに合わせる
     });
   }
 } else {
