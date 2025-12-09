@@ -13,7 +13,8 @@
     "affected:build": "nx affected:build",
     "affected:test": "nx affected:test",
     "affected:lint": "nx affected:lint",
-    "reset": "nx reset"
+    "reset": "nx reset",
+    "seed:firestore": "tsx scripts/seed-firestore.ts"
   },
   "private": true,
   "dependencies": {
