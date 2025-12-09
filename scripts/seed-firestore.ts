@@ -4,21 +4,42 @@ import * as admin from 'firebase-admin';
 // .env ファイルから環境変数を読み込む
 dotenv.config();
 
-// 環境変数からサービスアカウントキーを取得
-const serviceAccountKey = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
-
-if (!serviceAccountKey) {
-  throw new Error(
-    'FIREBASE_SERVICE_ACCOUNT_KEY 環境変数が設定されていません。'
-  );
-}
+// エミュレーター接続の確認
+// Firebase Admin SDKは、FIRESTORE_EMULATOR_HOST環境変数が設定されている場合のみエミュレーターに接続します
+const isEmulator = !!process.env.FIRESTORE_EMULATOR_HOST;
 
 // Firebase Admin SDK を初期化
-// サービスアカウントキーを使用して認証を行う
-const serviceAccount = JSON.parse(serviceAccountKey);
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
+// エミュレーター使用時は認証情報不要、本番環境ではサービスアカウントキーが必要
+const serviceAccountKey = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
+
+if (isEmulator) {
+  // エミュレーター使用時は認証情報なしで初期化
+  // FIRESTORE_EMULATOR_HOST環境変数が設定されている場合、自動的にエミュレーターに接続されます
+  if (admin.apps.length === 0) {
+    admin.initializeApp({
+      projectId: 'demo-project', // エミュレーターでは任意のプロジェクトIDでOK
+    });
+  }
+} else {
+  // 本番環境ではサービスアカウントキーが必要
+  if (!serviceAccountKey) {
+    throw new Error(
+      'FIREBASE_SERVICE_ACCOUNT_KEY 環境変数が設定されていません。\n' +
+        '\n' +
+        'エミュレーターを使用する場合は、以下のいずれかの方法で環境変数を設定してください：\n' +
+        '  1. コマンドライン: export FIRESTORE_EMULATOR_HOST=localhost:8080\n' +
+        '  2. .env ファイル: FIRESTORE_EMULATOR_HOST=localhost:8080 を追加\n' +
+        '\n' +
+        '本番環境を使用する場合は、FIREBASE_SERVICE_ACCOUNT_KEY を設定してください。'
+    );
+  }
+  const serviceAccount = JSON.parse(serviceAccountKey);
+  if (admin.apps.length === 0) {
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+    });
+  }
+}
 
 // Firestore データベースのインスタンスを取得
 const db = admin.firestore();
@@ -41,10 +62,12 @@ async function seedFirestore() {
     console.log('Firestore への初期データ投入を開始します...');
 
     // エミュレーター接続の確認
-    if (process.env.FIRESTORE_EMULATOR_HOST) {
+    if (isEmulator) {
       console.log(
         `エミュレーターに接続します: ${process.env.FIRESTORE_EMULATOR_HOST}`
       );
+    } else {
+      console.log('本番環境の Firestore に接続します');
     }
 
     // バッチ処理を使用して複数のドキュメントを一度に追加
