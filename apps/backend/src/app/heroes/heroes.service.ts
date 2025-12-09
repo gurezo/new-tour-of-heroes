@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import * as admin from 'firebase-admin';
-import { Hero } from './entities/hero.entity';
 import { CreateHeroDto } from './dto/create-hero.dto';
 import { UpdateHeroDto } from './dto/update-hero.dto';
+import { Hero } from './entities/hero.entity';
 
 @Injectable()
 export class HeroesService {
@@ -12,8 +12,8 @@ export class HeroesService {
   constructor() {
     // Firebase Admin SDK が初期化されていない場合は初期化
     if (admin.apps.length === 0) {
-      const isEmulator = !!process.env.FIRESTORE_EMULATOR_HOST;
-      const serviceAccountKey = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
+      const isEmulator = !!process.env['FIRESTORE_EMULATOR_HOST'];
+      const serviceAccountKey = process.env['FIREBASE_SERVICE_ACCOUNT_KEY'];
 
       if (isEmulator) {
         // エミュレーター使用時

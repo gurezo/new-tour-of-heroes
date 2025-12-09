@@ -1,26 +1,26 @@
 import {
-  Controller,
-  Get,
-  Post,
-  Put,
-  Delete,
   Body,
-  Param,
-  Query,
+  Controller,
+  Delete,
+  Get,
   HttpCode,
   HttpStatus,
+  Param,
+  Post,
+  Put,
+  Query,
 } from '@nestjs/common';
 import {
-  ApiTags,
   ApiOperation,
   ApiParam,
   ApiQuery,
   ApiResponse,
+  ApiTags,
 } from '@nestjs/swagger';
-import { HeroesService } from './heroes.service';
-import { Hero } from './entities/hero.entity';
 import { CreateHeroDto } from './dto/create-hero.dto';
 import { UpdateHeroDto } from './dto/update-hero.dto';
+import { Hero } from './entities/hero.entity';
+import { HeroesService } from './heroes.service';
 
 @Controller('heroes')
 @ApiTags('heroes')
@@ -36,8 +36,16 @@ export class HeroesController {
 
   @Get('search')
   @ApiOperation({ summary: 'Search heroes by name' })
-  @ApiQuery({ name: 'name', required: false, description: 'Hero name to search' })
-  @ApiResponse({ status: 200, description: 'Returns matching heroes', type: [Hero] })
+  @ApiQuery({
+    name: 'name',
+    required: false,
+    description: 'Hero name to search',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Returns matching heroes',
+    type: [Hero],
+  })
   async search(@Query('name') name?: string): Promise<Hero[]> {
     return this.heroesService.search(name);
   }
@@ -53,7 +61,11 @@ export class HeroesController {
 
   @Post()
   @ApiOperation({ summary: 'Create a new hero' })
-  @ApiResponse({ status: 201, description: 'Hero created successfully', type: Hero })
+  @ApiResponse({
+    status: 201,
+    description: 'Hero created successfully',
+    type: Hero,
+  })
   async create(@Body() createHeroDto: CreateHeroDto): Promise<Hero> {
     return this.heroesService.create(createHeroDto);
   }
@@ -61,7 +73,11 @@ export class HeroesController {
   @Put(':id')
   @ApiOperation({ summary: 'Update a hero' })
   @ApiParam({ name: 'id', type: 'number', description: 'Hero ID' })
-  @ApiResponse({ status: 200, description: 'Hero updated successfully', type: Hero })
+  @ApiResponse({
+    status: 200,
+    description: 'Hero updated successfully',
+    type: Hero,
+  })
   @ApiResponse({ status: 404, description: 'Hero not found' })
   async update(
     @Param('id') id: string,
